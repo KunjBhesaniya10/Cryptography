@@ -1,5 +1,6 @@
 import string
 from collections import Counter
+import Key_length_estimate
 # Letter frequency in English language
 ENGLISH_FREQ = {
     'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228,

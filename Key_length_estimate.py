@@ -1,3 +1,6 @@
+from collections import Counter
+import string
+
 def index_of_coincidence(text):
     N = len(text)
     freqs = Counter(text)
