@@ -1,6 +1,7 @@
 import string
 from collections import Counter
 from Key_length_estimate import estimate_key_length
+
 # Letter frequency in English language
 ENGLISH_FREQ = {
     'A': 8.167, 'B': 1.492, 'C': 2.782, 'D': 4.253, 'E': 12.702, 'F': 2.228,
@@ -22,7 +23,8 @@ def shift_character(char, shift):
 def decrypt_segment(segment, shift):
     return ''.join([shift_character(c, shift) for c in segment])
 
-# Function to split ciphertext into segments based on key length
+# Function to split ciphertext into segments based on key length. each segment
+# has letters encrypted by same part of key.
 def split_into_segments(ciphertext, key_length):
     segments = ['' for _ in range(key_length)]
     for i, char in enumerate(ciphertext):
@@ -55,14 +57,13 @@ def guess_key(ciphertext, key_length):
             chi_sq = chi_squared_stat(decrypted_segment)
             chi_squared_scores.append((shift, chi_sq))
 
-        # Find the shift with the lowest chi-squared value
         best_shift = min(chi_squared_scores, key=lambda x: x[1])[0]
         key += ALPHABET[best_shift]
 
     return key
 
 
-# Function to decrypt Vigenère cipher
+# Function to decrypt Vigenère cipher using guessed Key
 def decrypt_vigenere(ciphertext, key):
     decrypted_text = ''
     key_length = len(key)
@@ -76,7 +77,7 @@ if __name__ == '__main__':
 
     with open("encrypted_text.txt","r") as f:
         ciphertext = f.readline()
-    possible_key_lengths = estimate_key_length(ciphertext) # Assume we already estimated the key length as 5
+    possible_key_lengths = estimate_key_length(ciphertext) 
     possible_decryptions=[]
     
     # Guessing  the keys for each possible length using frequency analysis

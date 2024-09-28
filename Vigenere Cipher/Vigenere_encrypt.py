@@ -1,6 +1,5 @@
 import string
 
-# Define the alphabet used in the cipher
 ALPHABET = string.ascii_uppercase
 
 def shift_char(plain_char, key_char):
@@ -37,12 +36,13 @@ if __name__ == '__main__':
     key = input("Enter a Key to Encrypt the text : ")
     key = key.upper()
 
-    # Encrypt the plaintext using the Vigenère cipher
     encrypted_text = vigenere_encrypt(plaintext, key)
 
     # Output the encrypted message
     print("Original Plaintext:", plaintext)
     print("Encryption Key:", key)
     print("Encrypted Text:", encrypted_text)
+
     with open("encrypted_text.txt","w") as f:
         f.write(encrypted_text)
+    
