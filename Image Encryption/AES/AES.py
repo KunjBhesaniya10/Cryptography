@@ -3,17 +3,17 @@ from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 import numpy as np
 def pad(data):
-    """ Pad the data to be a multiple of the block size. """
+    """ Pads the data to be a multiple of the block size. """
     padding_length = AES.block_size - (len(data) % AES.block_size)
     return data + bytes([padding_length] * padding_length)
 
 def unpad(data):
-    """ Remove padding from the data. """
+    """ Removes padding from the data. """
     padding_length = data[-1]
     return data[:-padding_length]
 
 def encrypt_image(image_path, output_encrypted_path, key):
-    """ Encrypt the image using AES and save it to a file. """
+    """ Encrypts the image using AES and save it to a file. """
     # Load the image
     img = Image.open(image_path)
     img_data = np.array(img)
@@ -71,10 +71,10 @@ def decrypt_image(encrypted_path, output_decrypted_path, key):
 
     print(f"Image decrypted and saved to {output_decrypted_path}")
 
-# Example usage
-image_path = "input.png"  # Path to the input image
-output_encrypted_path = "encrypted_image.bin"  # Path to save the encrypted image
-output_decrypted_path = "decrypted_image.png"  # Path to save the decrypted image
+
+image_path = "input.png"  
+output_encrypted_path = "encrypted_image.bin"  
+output_decrypted_path = "decrypted_image.png"  
 
 # Generate a random AES key (16 bytes for AES-128)
 key = get_random_bytes(16)
